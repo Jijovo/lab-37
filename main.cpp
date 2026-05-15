@@ -1,34 +1,47 @@
 //Ezzat Mohamadein | ComSc 210 | Lab 37
 #include <iostream>
 #include <fstream>
+#include <map>
+#include <list>
 using namespace std;
 
-//sum ascii function prototype
-int sum_ascii(string s);
+//sum ascii function prototype | switch to gen_hash_index()
+list<char> gen_hash_index(string s);
 
 int main() {
-    //read all strings in lab-37-data-3.txt and sum all their ascii value sums
-    string s;
-    int sum = 0;
+    //define map of hash indexes
+    map<int, list<char>> hash_table;
+    //read all strings in lab-37-data-3.txt and run them through gen_hash_index(), then push the lists into the map
     ifstream fin("lab-37-data-3.txt");
-    while (getline(fin, s)) {
-        sum += sum_ascii(s);
+    string s;
+    int i = 0;
+    while (fin >> s) {
+        hash_table[i] = gen_hash_index(s);
+        i++;
+        fin.ignore();
     }
-    //close file    
     fin.close();
-    //print sum
-    cout << sum << endl;
+
+    //print first 100 values in the map
+    for (int i = 0; i < 100; i++) {
+        cout << i << ": ";
+        for (auto it = hash_table[i].begin(); it != hash_table[i].end(); it++) {
+            cout << *it;
+        }
+        cout << endl;
+    }
 
     return 0;
 }
 
 //sum ascii function definition, recieves a string and returns the sum of that string' characters ascii values
-int sum_ascii(string s) {
-    int sum = 0;
+//switch to gen_hash_index(), creats a hash index, a list of chars from the string
+list<char> gen_hash_index(string s) {
+    list<char> hash_index;
     for (int i = 0; i < s.length(); i++) {
-        sum += (int) s[i];
+        hash_index.push_back(s[i]);
     }
-    return sum;
+    return hash_index;
 }
 
 /* 
