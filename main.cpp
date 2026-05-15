@@ -1,21 +1,23 @@
 //Ezzat Mohamadein | ComSc 210 | Lab 37
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 //sum ascii function prototype
 int sum_ascii(string s);
 
 int main() {
-    char a = 'A';
-    cout << a << endl;
-    cout << (int) a << endl;
-    int b = 66;
-    cout << b << endl;
-    cout << (char) b << endl;
-
-    //testing sum ascii function
-    cout << sum_ascii("abcdef") << endl;
-    
+    //read all strings in lab-37-data-3.txt and sum all their ascii value sums
+    string s;
+    int sum = 0;
+    ifstream fin("lab-37-data-3.txt");
+    while (getline(fin, s)) {
+        sum += sum_ascii(s);
+    }
+    //close file    
+    fin.close();
+    //print sum
+    cout << sum << endl;
 
     return 0;
 }
