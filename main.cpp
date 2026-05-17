@@ -33,34 +33,64 @@ int main() {
         }
         //search for key
         if (c == 1) {
-            int k;
-            cout << "Enter the key: ";
-            cin >> k;
-            if (k > hash_table.size() || k < 0) { //check if key is valid
-                cout << "Invalid key!" << endl;
-            }
-            else { //print list of chars from that key
-                list<char> l = hash_table[k];
-                cout << "Key " << k << " contains: ";
-                for (list<char>::iterator it = l.begin(); it != l.end(); it++) {
-                    cout << *it;
+            string str;
+            cout << "Enter the string: ";
+            cin >> str;
+            //find the string in the map, say not found otherwise
+            bool found = false;
+            int ks;
+            for (auto it = hash_table.begin(); it != hash_table.end(); it++) {
+                if (it->second == gen_hash_index(str)) {
+                    found = true;
+                    ks = it->first;
+                    break;
                 }
-                cout << endl;
+            }
+            if (found) {
+                cout << "String found at key: " << ks << endl;
+            }
+            else {
+                cout << "String not found!" << endl;
             }
         }
         //add key
         else if (c == 2) {
-            int k;
+            int ka;
             string s;
             cout << "Enter the string: ";
             cin >> s;
-            //add to a new key
-            hash_table[hash_table.size()] = gen_hash_index(s);
-            cout << "Key " << hash_table.size() - 1 << " contains: ";
-            for (list<char>::iterator it = hash_table[hash_table.size() - 1].begin(); it != hash_table[hash_table.size() - 1].end(); it++) {
-                cout << *it;
+            //add to a new key by finding the highest key in the map and adding one to it
+            for (auto it = hash_table.begin(); it != hash_table.end(); it++) {
+                if (it->first > ka) {
+                    ka = it->first;
+                }
             }
-            cout << endl;
+            ka++;
+            hash_table[ka] = gen_hash_index(s);
+            cout << "String added at key: " << ka << endl;
+        }
+        //remove key
+        else if (c == 3) {
+            string strr;
+            int kr;
+            cout << "Enter the string: ";
+            cin >> strr;
+            //check if string exists
+            bool found = false;
+            for (auto it = hash_table.begin(); it != hash_table.end(); it++) {
+                if (it->second == gen_hash_index(strr)) {
+                    found = true;
+                    kr = it->first;
+                    break;
+                }
+            }
+            if (found) {
+                hash_table.erase(kr);
+                cout << "String removed at key: " << kr << endl;
+            }
+            else {
+                cout << "String not found!" << endl;
+            }
         }
     }
 
