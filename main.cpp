@@ -22,13 +22,13 @@ int main() {
     }
     fin.close();
 
-    //add menu with following options: seach for a key, add a key, remove a key, modify a key, exit
+    //add menu with following options: search for a key, add a key, remove a key, modify a key, exit, print first 100 keys
     int c;
-    while (c!=5) {
-        cout << "[1] Search for a key" << endl << "[2] Add a key" << endl << "[3] Remove a key" << endl << "[4] Modify a key" << endl << "[5] Exit" << endl << "Choice: ";
+    while (c!=6) {
+        cout << "[1] Search for a key" << endl << "[2] Add a key" << endl << "[3] Remove a key" << endl << "[4] Modify a key" << endl << "[5] Print first 100 keys" << endl << "[6] Exit" << endl << "Choice: ";
         cin >> c;
         //check if choice is valid
-        if (c < 1 || c > 5) {
+        if (c < 1 || c > 6) {
             cout << "Invalid choice!" << endl;
         }
         //search for key
@@ -117,6 +117,22 @@ int main() {
             else {
                 cout << "String not found!" << endl;
             }
+        }
+        //exit
+        else if (c == 6) {
+            cout << "Goodbye!" << endl;
+        }
+        //print first 100 keys (didn't see before, thought search was milestone 1)
+        else if (c == 5) {
+            cout << "First 100 keys: " << endl;
+            int i = 0;
+            for (auto it = hash_table.begin(); it != hash_table.end(); it++) {
+                if (i < 100) {
+                    cout << it->first << " " << endl;
+                    i++;
+                }
+            }
+            cout << endl;
         }
     }
 
