@@ -92,6 +92,32 @@ int main() {
                 cout << "String not found!" << endl;
             }
         }
+        //modify
+        else if (c == 4) {
+            string strr;
+            int kr;
+            cout << "Enter the string: ";
+            cin >> strr;
+            //check if string exists
+            bool found = false;
+            for (auto it = hash_table.begin(); it != hash_table.end(); it++) {
+                if (it->second == gen_hash_index(strr)) {
+                    found = true;
+                    kr = it->first;
+                    break;
+                }
+            }
+            if (found) { //modify the string
+                string s;
+                cout << "Enter the new string: ";
+                cin >> s;
+                hash_table[kr] = gen_hash_index(s);
+                cout << "String modified at key: " << kr << endl;
+            }
+            else {
+                cout << "String not found!" << endl;
+            }
+        }
     }
 
     return 0;
