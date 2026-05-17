@@ -1,4 +1,4 @@
-//Ezzat Mohamadein | ComSc 210 | Lab 37
+//Ezzat Mohamadein | ComSc 210 | Lab 38
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -22,13 +22,28 @@ int main() {
     }
     fin.close();
 
-    //print first 100 values in the map
-    for (int i = 0; i < 100; i++) {
-        cout << i << ": ";
-        for (auto it = hash_table[i].begin(); it != hash_table[i].end(); it++) {
-            cout << *it;
+    //add menu with following options: seach for a key, add a key, remove a key, modify a key, exit
+    int c;
+    while (c!=5) {
+        cout << "[1] Search for a key" << endl << "[2] Add a key" << endl << "[3] Remove a key" << endl << "[4] Modify a key" << endl << "[5] Exit" << endl << "Choice: ";
+        cin >> c;
+        //search for key
+        if (c == 1) {
+            int k;
+            cout << "Enter the key: ";
+            cin >> k;
+            if (k > hash_table.size() || k < 0) { //check if key is valid
+                cout << "Invalid key!" << endl;
+            }
+            else { //print list of chars from that key
+                list<char> l = hash_table[k];
+                cout << "Key " << k << " contains: ";
+                for (list<char>::iterator it = l.begin(); it != l.end(); it++) {
+                    cout << *it << " ";
+                }
+                cout << endl;
+            }
         }
-        cout << endl;
     }
 
     return 0;
