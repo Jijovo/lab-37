@@ -27,6 +27,10 @@ int main() {
     while (c!=5) {
         cout << "[1] Search for a key" << endl << "[2] Add a key" << endl << "[3] Remove a key" << endl << "[4] Modify a key" << endl << "[5] Exit" << endl << "Choice: ";
         cin >> c;
+        //check if choice is valid
+        if (c < 1 || c > 5) {
+            cout << "Invalid choice!" << endl;
+        }
         //search for key
         if (c == 1) {
             int k;
@@ -39,10 +43,24 @@ int main() {
                 list<char> l = hash_table[k];
                 cout << "Key " << k << " contains: ";
                 for (list<char>::iterator it = l.begin(); it != l.end(); it++) {
-                    cout << *it << " ";
+                    cout << *it;
                 }
                 cout << endl;
             }
+        }
+        //add key
+        else if (c == 2) {
+            int k;
+            string s;
+            cout << "Enter the string: ";
+            cin >> s;
+            //add to a new key
+            hash_table[hash_table.size()] = gen_hash_index(s);
+            cout << "Key " << hash_table.size() - 1 << " contains: ";
+            for (list<char>::iterator it = hash_table[hash_table.size() - 1].begin(); it != hash_table[hash_table.size() - 1].end(); it++) {
+                cout << *it;
+            }
+            cout << endl;
         }
     }
 
